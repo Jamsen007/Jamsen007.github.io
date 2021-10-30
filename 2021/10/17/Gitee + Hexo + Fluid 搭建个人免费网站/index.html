@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/hexo-blog/img/favicon.png">
+  <link rel="icon" href="/hexo-blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="链接：1.Hexo2.Gitee3.Fluid主题   准备环境1. nodejs+npm的安装 从nodejs官网直接下载，并且根据顺序安装文件到对应的位置，就完成因为nodejs内部已经集成npm，所以不必要分开下载，地址:nodejs+npm  12$ node -v  $ npm -v 上面校验本地是否安装完成，如下图：  新建node_global和node_cache文件夹，避免npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitee + Hexo + Fluid 搭建个人免费网站">
+<meta property="og:url" content="https://jasoninterface.gitee.io/hexo-blog/2021/10/17/Gitee%20+%20Hexo%20+%20Fluid%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%85%8D%E8%B4%B9%E7%BD%91%E7%AB%99/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="链接：1.Hexo2.Gitee3.Fluid主题   准备环境1. nodejs+npm的安装 从nodejs官网直接下载，并且根据顺序安装文件到对应的位置，就完成因为nodejs内部已经集成npm，所以不必要分开下载，地址:nodejs+npm  12$ node -v  $ npm -v 上面校验本地是否安装完成，如下图：  新建node_global和node_cache文件夹，避免npm">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/node+npm.jpg">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/createFolder.png">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/npmPath.jpg">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/git.png">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/hexoSucceed.png">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/giteePagesConfig.png">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/updateConfig.png">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/repo.jpg">
+<meta property="article:published_time" content="2021-10-17T08:50:26.950Z">
+<meta property="article:modified_time" content="2021-10-30T08:36:03.787Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/node+npm.jpg">
+  
+  <title>Gitee + Hexo + Fluid 搭建个人免费网站 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/hexo-blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/hexo-blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jasoninterface.gitee.io","root":"/hexo-blog/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/hexo-blog/local-search.xml"};
+  </script>
+  <script  src="/hexo-blog/js/utils.js" ></script>
+  <script  src="/hexo-blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/hexo-blog/">
+      <strong>阿成的日常</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/hexo-blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Gitee + Hexo + Fluid 搭建个人免费网站">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-17 16:50" pubdate>
+        2021年10月17日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Gitee + Hexo + Fluid 搭建个人免费网站</h1>
+            
+            <div class="markdown-body">
+              <p><strong>链接</strong>：<br>1.<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a><br>2.<a target="_blank" rel="noopener" href="https://gitee.com/">Gitee</a><br>3.<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid主题</a>  </p>
+<h2 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h2><h3 id="1-nodejs-npm的安装"><a href="#1-nodejs-npm的安装" class="headerlink" title="1. nodejs+npm的安装"></a>1. nodejs+npm的安装</h3><ul>
+<li><strong>从nodejs官网直接下载，并且根据顺序安装文件到对应的位置，就完成</strong><br>因为nodejs内部已经集成npm，所以不必要分开下载，地址:<a target="_blank" rel="noopener" href="https://nodejs.org/">nodejs+npm</a></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ node -v  <br>$ npm -v<br></code></pre></td></tr></table></figure>
+<p>上面校验本地是否安装完成，如下图：<br><img src="/hexo-blog/img/page/node+npm.jpg" srcset="/hexo-blog/img/loading.gif" lazyload alt="npm,nodejs"></p>
+<ul>
+<li><strong>新建node_global和node_cache文件夹，避免npm安装的依赖全部堆积到默认盘</strong></li>
+</ul>
+<p>因为默认的npm下载依赖安装路径都是在 ‘C:\Users\你自己电脑名字\AppData\Roaming\npm’ 路径下面，所以我们一般会更改这个位置</p>
+<p>1.在安装nodejs的目录下，新建上面两个文件夹，如下图：<br><img src="/hexo-blog/img/page/createFolder.png" srcset="/hexo-blog/img/loading.gif" lazyload alt="folder"></p>
+<p>2.配置全局环境变量</p>
+<p>用户变量：<br>编辑PATH，添加’C:\Program Files\nodejs\node_global’路径<br>系统变量：<br>新建变量，名字NODE_PATH,值’C:\Program Files\nodejs\node_modules’</p>
+<p>3.然后运行执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ npm config <span class="hljs-built_in">set</span> prefix <span class="hljs-string">&quot;C:\Program Files\nodejs\node_global&quot;</span>  <br>$ npm config <span class="hljs-built_in">set</span> cache <span class="hljs-string">&quot;C:\Program Files\nodejs\node_cache&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>最后npm安装的路径就会改变，查看效果，如下图:<br><img src="/hexo-blog/img/page/npmPath.jpg" srcset="/hexo-blog/img/loading.gif" lazyload alt="path"></p>
+<h3 id="2-Git安装"><a href="#2-Git安装" class="headerlink" title="2. Git安装"></a>2. Git安装</h3><p>从Git官网下载稳定的版本，然后开始无脑点击下一步安装即可。<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">Git地址</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git version<br></code></pre></td></tr></table></figure>
+
+<p>上面校验本地是否安装完成，如下图：<br><img src="/hexo-blog/img/page/git.png" srcset="/hexo-blog/img/loading.gif" lazyload alt="git"></p>
+<h2 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h2><h3 id="1-搭建Hexo网站"><a href="#1-搭建Hexo网站" class="headerlink" title="1. 搭建Hexo网站"></a>1. 搭建Hexo网站</h3><ul>
+<li><p><strong>下载脚手架</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 全局安装</span><br>$ npm install hexo-cli -g<br><span class="hljs-comment"># 查看hexo版本</span><br>$ hexo -v<br><br><span class="hljs-comment">#出现下面的，就是安装成功</span><br>hexo-cli: 4.3.0<br>os: win32 10.0.18363<br>node: 14.18.1<br>v8: 8.4.371.23-node.84<br>uv: 1.42.0<br>zlib: 1.2.11<br>brotli: 1.0.9<br>ares: 1.17.2<br>modules: 83<br>nghttp2: 1.42.0<br>napi: 8<br>llhttp: 2.1.4<br>openssl: 1.1.1l<br>cldr: 39.0<br>icu: 69.1<br>tz: 2021a<br>unicode: 13.0<br></code></pre></td></tr></table></figure></li>
+<li><p><strong>初始化项目</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo init 项目名字 <span class="hljs-comment"># 初始化</span><br><br>found 0 vulnerabilities<br>INFO  Start blogging with Hexo! <span class="hljs-comment">#安装成功</span><br><br>$ <span class="hljs-built_in">cd</span> 项目名字 <span class="hljs-comment"># 进入目录</span><br>$ npm install <span class="hljs-comment"># 安装npm</span><br>$ hexo server <span class="hljs-comment"># 启动服务</span><br><br>INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop. <span class="hljs-comment"># 部署成功</span><br><br></code></pre></td></tr></table></figure>
+<p>如下图：<br><img src="/hexo-blog/img/page/hexoSucceed.png" srcset="/hexo-blog/img/loading.gif" lazyload alt="succeed"></p>
+<h3 id="2-部署网站到Gitee"><a href="#2-部署网站到Gitee" class="headerlink" title="2. 部署网站到Gitee"></a>2. 部署网站到Gitee</h3><ul>
+<li><p><strong>创建账号</strong><br>这步可以跳过了吧，哈哈。</p>
+</li>
+<li><p><strong>新建仓库</strong></p>
+</li>
+</ul>
+<p>仓库名称和仓库路径要尽量保持一致。</p>
+<ul>
+<li><strong>配置ssh</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git config --global user.name <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment"># gitee用户名</span><br>$ git config --global user.email <span class="hljs-string">&quot;&quot;</span>  <span class="hljs-comment"># 邮箱</span><br><span class="hljs-comment"># 生成SSH公钥并添加到gitee，实现免密码登录</span><br><span class="hljs-comment"># 1、生成公钥</span><br>ssh-keygen -t rsa -C <span class="hljs-string">&quot;# 邮箱&quot;</span> <br></code></pre></td></tr></table></figure>
+<p>把 C:\Users\主机名.ssh 目录，把 密钥名字.pub 里面的信息复制到gitee的 SSH公钥 </p>
+<ul>
+<li><strong>配置gitee pages</strong></li>
+</ul>
+<p>进入到仓库，点击管理选项，点击选项初始化 README.md 快速开启 SVN访问，然后点击服务，选择Gitee Pages，如果这个是第一次操作，需要身份证上传核实，然后等一天就可以重新回到这个界面操作。</p>
+<p>然后按照下图操作即可：<br><img src="/hexo-blog/img/page/giteePagesConfig.png" srcset="/hexo-blog/img/loading.gif" lazyload alt="gitee pages"></p>
+<ul>
+<li><strong>配置项目的_config.yml文件</strong></li>
+</ul>
+<ol>
+<li>修改url中的Gitee Pages地址</li>
+<li>语言可修改为中文language: zh-cn</li>
+<li>deploy 修改为Gitee Pages 的地址</li>
+</ol>
+<p>如下图：<br><img src="/hexo-blog/img/page/updateConfig.png" srcset="/hexo-blog/img/loading.gif" lazyload alt="config"></p>
+<p><img src="/hexo-blog/img/page/repo.jpg" srcset="/hexo-blog/img/loading.gif" lazyload alt="config"></p>
+<ul>
+<li><strong>部署项目</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">cd</span> 项目名字  <span class="hljs-comment">#进入项目目录</span><br>$ hexo clean <span class="hljs-comment">#清理缓存</span><br>$ hexo g <span class="hljs-comment">#生成网站文件</span><br>$ hexo s <span class="hljs-comment">#本地测试代码，Ctrl+c停止本地映射</span><br>$ hexo d <span class="hljs-comment">#推送本地代码到码云，第一推送需要输入gitee的账号密码 </span><br></code></pre></td></tr></table></figure>
+<p>注意，每次部署了项目，都要在Gitee Pages里面点击更新</p>
+<h3 id="3-搭配Fluid主题"><a href="#3-搭配Fluid主题" class="headerlink" title="3. 搭配Fluid主题"></a>3. 搭配Fluid主题</h3><p><strong>创建fluid的配置文件，该文件会永久覆盖_config.yml文件</strong></p>
+<p>修改_config.yml的配置，找到theme，指定主题为：fluid</p>
+<p>在_config.yml同目录创建_config.fluid.yml文件，里面的内容直接拷贝<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">这里</a></p>
+<p>然后重启，就完成了。</p>
+<p>如需要继续编辑或者写文章，<a target="_blank" rel="noopener" href="https://fluid-dev.github.io/hexo-fluid-docs/start/#%E4%B8%BB%E9%A2%98%E7%AE%80%E4%BB%8B">点击这里</a></p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="vscode的终端无法执行hexo指令"><a href="#vscode的终端无法执行hexo指令" class="headerlink" title="vscode的终端无法执行hexo指令"></a>vscode的终端无法执行hexo指令</h3><ol>
+<li>以管理员身份运行power shell<br>（备注：右键win标，选择 “Windows PowerShell(管理员)”打开即可）</li>
+<li>输入 set-ExecutionPolicy RemoteSigned 回车</li>
+<li>输入 A 或者 Y 回车</li>
+</ol>
+<h3 id="Hexo部署出现错误err-Error-Spawn-failed解决方式"><a href="#Hexo部署出现错误err-Error-Spawn-failed解决方式" class="headerlink" title="Hexo部署出现错误err: Error: Spawn failed解决方式"></a>Hexo部署出现错误err: Error: Spawn failed解决方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">##进入项目根目录</span><br><span class="hljs-built_in">cd</span> 项目名字<br><br><span class="hljs-comment">##删除git提交内容文件夹</span><br>rm -rf .deploy_git/<br><br><span class="hljs-comment">##执行</span><br>git config --global core.autocrlf <span class="hljs-literal">false</span><br><br><span class="hljs-comment">##最后</span><br>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/hexo-blog/js/events.js" ></script>
+<script  src="/hexo-blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/hexo-blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/hexo-blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/hexo-blog/js/boot.js" ></script>
+
+
+</body>
+</html>
