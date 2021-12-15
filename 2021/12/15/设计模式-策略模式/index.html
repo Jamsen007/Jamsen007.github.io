@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/hexo-blog/img/favicon.png">
+  <link rel="icon" href="/hexo-blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="链接：这里就是Demo的链接地址，仅供参考哦 介绍策略模式，顾名思义就是多种方法的意思。相信在互联网上各种资料都飞来飞去的情况，都知道这个作用了吧，我主要说一下个人的理解。 一般使用策略模式，都会搭配模板模式，这两者的区别在于：  策略模式只是关注方法里面的实现逻辑。 模板模式只是关注于把多个方法抽离出来，注重于步骤。  当然，之所以搭配模板模式，一般都是方法比较多，而且都具有公共性质，所以才会抽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式-策略模式（搭配自定义注解+枚举）">
+<meta property="og:url" content="https://jasoninterface.gitee.io/hexo-blog/2021/12/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="链接：这里就是Demo的链接地址，仅供参考哦 介绍策略模式，顾名思义就是多种方法的意思。相信在互联网上各种资料都飞来飞去的情况，都知道这个作用了吧，我主要说一下个人的理解。 一般使用策略模式，都会搭配模板模式，这两者的区别在于：  策略模式只是关注方法里面的实现逻辑。 模板模式只是关注于把多个方法抽离出来，注重于步骤。  当然，之所以搭配模板模式，一般都是方法比较多，而且都具有公共性质，所以才会抽">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/pic.jpg">
+<meta property="article:published_time" content="2021-12-15T13:14:10.000Z">
+<meta property="article:modified_time" content="2021-12-15T13:49:49.187Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jasoninterface.gitee.io/hexo-blog/img/page/pic.jpg">
+  
+  <title>设计模式-策略模式（搭配自定义注解+枚举） - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/hexo-blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/hexo-blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jasoninterface.gitee.io","root":"/hexo-blog/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/hexo-blog/local-search.xml"};
+  </script>
+  <script  src="/hexo-blog/js/utils.js" ></script>
+  <script  src="/hexo-blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/hexo-blog/">
+      <strong>阿成的日常</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/hexo-blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/hexo-blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="设计模式-策略模式（搭配自定义注解+枚举）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-15 21:14" pubdate>
+        2021年12月15日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">设计模式-策略模式（搭配自定义注解+枚举）</h1>
+            
+            <div class="markdown-body">
+              <p><strong>链接</strong>：<br><a target="_blank" rel="noopener" href="https://gitee.com/jasoninterface/design_pattern.git">这里就是Demo的链接地址，仅供参考哦</a></p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>策略模式，顾名思义就是多种方法的意思。相信在互联网上各种资料都飞来飞去的情况，都知道这个作用了吧，<br>我主要说一下个人的理解。</p>
+<p>一般使用策略模式，都会搭配模板模式，这两者的区别在于：</p>
+<ul>
+<li><strong>策略模式只是关注方法里面的实现逻辑。</strong></li>
+<li><strong>模板模式只是关注于把多个方法抽离出来，注重于步骤。</strong></li>
+</ul>
+<p>当然，之所以搭配模板模式，一般都是方法比较多，而且都具有公共性质，所以才会抽离出来。</p>
+<p>本教程主要使用策略模式+模板模式+自定义注解+枚举</p>
+<p>下面直接开撸吧~~~</p>
+<h2 id="开撸"><a href="#开撸" class="headerlink" title="开撸"></a>开撸</h2><p>1、去到spring官网，直接搭建一个spring boot项目。</p>
+<p>2、创建枚举值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs bash">/**<br> * @description:<br> * @author: gongjuncheng<br> * @date: 2021-12-12 21:20<br> **/<br>public enum PayCodeEnum &#123;<br><br>    PC_PAY(<span class="hljs-string">&quot;PC_PAY&quot;</span>,<span class="hljs-string">&quot;PC端支付&quot;</span>),<br>    MOBILE_PAY(<span class="hljs-string">&quot;MOBILE_PAY&quot;</span>,<span class="hljs-string">&quot;手机端支付&quot;</span>)<br><br>    ;<br><br>    private String key;<br>    private String value;<br><br>    PayCodeEnum(String key, String value) &#123;<br>        this.key = key;<br>        this.value = value;<br>    &#125;<br><br>    public String <span class="hljs-function"><span class="hljs-title">getKey</span></span>() &#123;<br>        <span class="hljs-built_in">return</span> key;<br>    &#125;<br><br>    public String <span class="hljs-function"><span class="hljs-title">getValue</span></span>() &#123;<br>        <span class="hljs-built_in">return</span> value;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>3、创建自定义注解</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">/**<br> * @description:<br> * @author: gongjuncheng<br> * @date: 2021-12-12 21:24<br> **/<br>@Target(&#123;ElementType.TYPE&#125;)<br>@Retention(RetentionPolicy.RUNTIME)<br>@Documented<br>public @interface PayChannel &#123;<br>    PayCodeEnum value();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>4、创建公共接口，这里定义了具体提供给外部的接口，就是入口嘛。你懂的~</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">/**<br> * @description:<br> * @author: gongjuncheng<br> * @date: 2021-12-12 21:11<br> **/<br>public interface IBizService &#123;<br><br>    void pay();<br><br>    void refund();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>5、创建抽象类，该类就是用来封装粒度比较大的方法，然后使用模板方法抽离具体的方法步骤。~</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs bash">/**<br> * @description:<br> * @author: gongjuncheng<br> * @date: 2021-12-12 21:12<br> **/<br>@Slf4j<br>@Component<br>public abstract class BizAbstractService implements IBizService &#123;<br><br>    public abstract void verify();<br><br>    public abstract void buildParams();<br><br>    private void <span class="hljs-function"><span class="hljs-title">handlePay</span></span>()&#123;<br>        log.info(<span class="hljs-string">&quot;支付成功&quot;</span>);<br>    &#125;<br><br>    private void <span class="hljs-function"><span class="hljs-title">handleRefund</span></span>()&#123;<br>        log.info(<span class="hljs-string">&quot;退款成功&quot;</span>);<br>    &#125;<br><br>    @Override<br>    public void <span class="hljs-function"><span class="hljs-title">pay</span></span>() &#123;<br>        verify();<br>        handlePay();<br>    &#125;<br><br>    @Override<br>    public void <span class="hljs-function"><span class="hljs-title">refund</span></span>() &#123;<br>        buildParams();<br>        handleRefund();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>6、创建加载类，我喜欢用factory来命名，虽然不是个工厂类，不过就是想象一个专门把策略加载到一个容器里面的工厂！GO</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs bash">/**<br> * @description:<br> * @author: gongjuncheng<br> * @date: 2021-12-12 21:04<br> **/<br>@Component<br>public class BizFactory implements ApplicationContextAware, ApplicationListener&lt;ContextRefreshedEvent&gt; &#123;<br><br>    private ApplicationContext applicationContext;<br><br>    // 这个就是容器啦~，就像spring容器一样呗。<br>    private static final Map&lt;String, IBizService&gt; strategys = new ConcurrentHashMap&lt;&gt;();<br><br>    public IBizService getStrategy(String channel)&#123;<br>        // 这里可以提供给外部使用，到底用什么策略，通过参数定义<br>         <span class="hljs-built_in">return</span> Optional.ofNullable(strategys.get(channel))<br>            .orElseThrow(<br>                () -&gt;<br>                    new IllegalStateException(<span class="hljs-string">&quot;找不到该策略:&quot;</span> + channel));<br>    &#125;<br><br>    @Override<br>    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;<br>        this.applicationContext = applicationContext;<br>    &#125;<br><br>    private synchronized void <span class="hljs-function"><span class="hljs-title">init</span></span>()&#123;<br>        // 这个方法就是获取实现类某个接口的所有类，很有用的哦，开发的时候给你很大的便捷性。<br>        Map&lt;String, IBizService&gt; strategyMap = applicationContext.getBeansOfType(IBizService.class);<br>        // 这里就是围殴了装13而已，用了流的方式，高大上点有木有？<br>        strategyMap.forEach(<br>            (name, strategy) -&gt; &#123;<br>                PayChannel channel =<br>                    Optional.ofNullable(strategy.getClass().getAnnotation(PayChannel.class))<br>                        .orElseThrow(<br>                            () -&gt; new IllegalStateException(<span class="hljs-string">&quot;注册策略失败:&quot;</span> + name));<br>                strategys.putIfAbsent(channel.value().getKey(), strategy);<br>            &#125;);<br>    &#125;<br><br>    // 这里是加载策略的时机，其实也可以用注解，就不用实现 ApplicationListener&lt;ContextRefreshedEvent&gt;<br>    @Override<br>    public void onApplicationEvent(ContextRefreshedEvent event) &#123;<br>        init();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>7、创建两个策略，一个是PC端，一个是移动端~</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">/**<br> * @description:<br> * @author: gongjuncheng<br> * @date: 2021-12-12 21:27<br> **/<br>@Service<br>@Slf4j<br>@PayChannel(value = PayCodeEnum.MOBILE_PAY)<br>public class PayByMobileService extends BizAbstractService &#123;<br><br>    @Override<br>    public void <span class="hljs-function"><span class="hljs-title">verify</span></span>() &#123;<br>        log.info(<span class="hljs-string">&quot;手机端校验参数&quot;</span>);<br>    &#125;<br><br>    @Override<br>    public void <span class="hljs-function"><span class="hljs-title">buildParams</span></span>() &#123;<br>        log.info(<span class="hljs-string">&quot;手机端构建退款参数&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">/**<br> * @description:<br> * @author: gongjuncheng<br> * @date: 2021-12-12 21:25<br> **/<br>@Service<br>@Slf4j<br>@PayChannel(value = PayCodeEnum.PC_PAY)<br>public class PaybyPcService extends BizAbstractService &#123;<br><br>    @Override<br>    public void <span class="hljs-function"><span class="hljs-title">verify</span></span>() &#123;<br>        log.info(<span class="hljs-string">&quot;PC端校验参数&quot;</span>);<br>    &#125;<br><br>    @Override<br>    public void <span class="hljs-function"><span class="hljs-title">buildParams</span></span>() &#123;<br>        log.info(<span class="hljs-string">&quot;PC端构建退款参数&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>8、开始测试~，不多BB</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">@SpringBootTest<br>class PatternApplicationTests &#123;<br><br>	@Resource<br>	private BizFactory factory;<br><br>	@Test<br>	void <span class="hljs-function"><span class="hljs-title">contextLoads</span></span>() &#123;<br>		factory.getStrategy(PayCodeEnum.PC_PAY.getKey()).pay();<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>微信扫一下二维码，不定时分享有趣的事情哦：</p>
+<p><img src="/hexo-blog/img/page/pic.jpg" srcset="/hexo-blog/img/loading.gif" lazyload alt="pic"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/hexo-blog/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/hexo-blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/hexo-blog/2021/10/17/Gitee%20+%20Hexo%20+%20Fluid%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%85%8D%E8%B4%B9%E7%BD%91%E7%AB%99/">
+                        <span class="hidden-mobile">Gitee + Hexo + Fluid 搭建个人免费网站</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/hexo-blog/js/events.js" ></script>
+<script  src="/hexo-blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/hexo-blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/hexo-blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/hexo-blog/js/boot.js" ></script>
+
+
+</body>
+</html>
