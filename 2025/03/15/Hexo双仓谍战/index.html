@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="欢迎来到《程序员摸鱼指南》特别篇！今天我们要玩一场代码版的”碟中谍”——让源码在私有仓库”隐身”，让静态页面在GitHub Pages光鲜亮相，最后还能喝着咖啡看机器人帮你干活！☕  🕵️♂️ 核心机密：双仓战略1. 特工装备清单123456789C:&#x2F;Users&#x2F;You&#x2F;hexo-source（Win11特工工作站）├── scaffolds&#x2F;       # 文章模板├── source&#x2F;_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo双仓谍战：用GitHub Actions在老板眼皮底下优雅摸鱼">
+<meta property="og:url" content="https://jamsen007.github.io/2025/03/15/Hexo%E5%8F%8C%E4%BB%93%E8%B0%8D%E6%88%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="欢迎来到《程序员摸鱼指南》特别篇！今天我们要玩一场代码版的”碟中谍”——让源码在私有仓库”隐身”，让静态页面在GitHub Pages光鲜亮相，最后还能喝着咖啡看机器人帮你干活！☕  🕵️♂️ 核心机密：双仓战略1. 特工装备清单123456789C:&#x2F;Users&#x2F;You&#x2F;hexo-source（Win11特工工作站）├── scaffolds&#x2F;       # 文章模板├── source&#x2F;_">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://media.giphy.com/media/3o6Zt6KHxJTZ5sHrtC/giphy.gif">
+<meta property="og:image" content="https://docs.github.com/assets/cb-78727/images/help/settings/new-repository-secret-button.png">
+<meta property="og:image" content="https://media.giphy.com/media/3o6Zt6KHxJTZ5sHrtC/giphy.gif">
+<meta property="og:image" content="https://media.giphy.com/media/l0MYNB04rBb26sLS8/giphy.gif">
+<meta property="article:published_time" content="2025-03-15T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-15T13:31:07.479Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://media.giphy.com/media/3o6Zt6KHxJTZ5sHrtC/giphy.gif">
+  
+  <title>Hexo双仓谍战：用GitHub Actions在老板眼皮底下优雅摸鱼 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jamsen007.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>阿成的日常</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Hexo双仓谍战：用GitHub Actions在老板眼皮底下优雅摸鱼">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2025-03-15 00:00" pubdate>
+        2025年3月15日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hexo双仓谍战：用GitHub Actions在老板眼皮底下优雅摸鱼</h1>
+            
+            <div class="markdown-body">
+              <p>欢迎来到《程序员摸鱼指南》特别篇！今天我们要玩一场代码版的”碟中谍”——让源码在私有仓库”隐身”，让静态页面在GitHub Pages光鲜亮相，最后还能喝着咖啡看机器人帮你干活！☕</p>
+<hr>
+<h2 id="🕵️♂️-核心机密：双仓战略"><a href="#🕵️♂️-核心机密：双仓战略" class="headerlink" title="🕵️♂️ 核心机密：双仓战略"></a>🕵️♂️ 核心机密：双仓战略</h2><h3 id="1-特工装备清单"><a href="#1-特工装备清单" class="headerlink" title="1. 特工装备清单"></a>1. 特工装备清单</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs tree">C:/Users/You/hexo-source（Win11特工工作站）<br>├── scaffolds/       # 文章模板<br>├── source/_posts/   # 你的摸鱼笔记<br>└── _config.yml      # 总控开关<br><br>GitHub云端指挥部<br>├── 🔒hexo-source（私有仓库） ← 军情六处<br>│   └── .github/workflows/ ← 机器人控制中心<br>└── 🎪yourname.github.io（公有仓库） ← 对外展示橱窗<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://media.giphy.com/media/3o6Zt6KHxJTZ5sHrtC/giphy.gif" srcset="/img/loading.gif" lazyload alt="双仓作战示意图"></p>
+<h3 id="2-特工行动纲领"><a href="#2-特工行动纲领" class="headerlink" title="2. 特工行动纲领"></a>2. 特工行动纲领</h3><ul>
+<li><strong>GitHub Pages</strong>：你的橱窗管家，只会展示<code>public/</code>目录的静态文件</li>
+<li><strong>GitHub Actions</strong>：你的007特工，能同时完成”备份源码→生成页面→秘密部署”</li>
+</ul>
+<hr>
+<h2 id="🛠️-特工装备配置指南"><a href="#🛠️-特工装备配置指南" class="headerlink" title="🛠️ 特工装备配置指南"></a>🛠️ 特工装备配置指南</h2><h3 id="1-创建秘密基地"><a href="#1-创建秘密基地" class="headerlink" title="1. 创建秘密基地"></a>1. 创建秘密基地</h3><ol>
+<li><p>在GitHub新建两个仓库：</p>
+<ul>
+<li>私有仓：<code>hexo-source</code>（建议和本地目录同名）</li>
+<li>公有仓：<code>&lt;用户名&gt;.github.io</code>（GitHub Pages强制命名）</li>
+</ul>
+</li>
+<li><p>在VSCode终端绑定私有仓：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">cd</span> hexo<span class="hljs-literal">-source</span><br>git remote add origin https://github.com/你的名字/hexo<span class="hljs-literal">-source</span>.git<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="2-获取特工证件（GitHub-Token）"><a href="#2-获取特工证件（GitHub-Token）" class="headerlink" title="2. 获取特工证件（GitHub Token）"></a>2. 获取特工证件（GitHub Token）</h3><ol>
+<li>访问<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">Token颁发处</a></li>
+<li>勾选<code>repo</code>和<code>workflow</code>权限（就像给007配枪）</li>
+<li>在私有仓Settings→Secrets→Actions添加：<ul>
+<li>Name: <code>HEXO_DEPLOY_KEY</code>（接头暗号）</li>
+<li>Value: 粘贴刚复制的Token（别让任何人看见！）</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://docs.github.com/assets/cb-78727/images/help/settings/new-repository-secret-button.png" srcset="/img/loading.gif" lazyload alt="密钥配置图"></p>
+<hr>
+<h2 id="🤖-训练你的机器人特工"><a href="#🤖-训练你的机器人特工" class="headerlink" title="🤖 训练你的机器人特工"></a>🤖 训练你的机器人特工</h2><h3 id="1-创建机器人控制程序（-github-workflows-deploy-yml）"><a href="#1-创建机器人控制程序（-github-workflows-deploy-yml）" class="headerlink" title="1. 创建机器人控制程序（.github/workflows/deploy.yml）"></a>1. 创建机器人控制程序（.github/workflows/deploy.yml）</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">摸鱼自动执行程序</span><br><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span> [ <span class="hljs-string">main</span> ]  <span class="hljs-comment"># 监听main分支的动静</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">deploy:</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-comment"># 第一阶段：获取装备</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">黑进军火库</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v3</span>  <span class="hljs-comment"># GitHub官方开锁工具</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">submodules:</span> <span class="hljs-string">recursive</span>   <span class="hljs-comment"># 偷走主题子模块</span><br>          <br>      <span class="hljs-comment"># 第二阶段：武装机器人</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">安装Node.js</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v3</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;18&#x27;</span>       <span class="hljs-comment"># 必须和你的本地版本一致！</span><br>          <br>      <span class="hljs-comment"># 第三阶段：组装武器</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">装载Hexo</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">          npm install hexo-cli -g</span><br><span class="hljs-string">          npm ci --prefer-offline  # 精确复刻你的本地环境</span><br><span class="hljs-string"></span>          <br>      <span class="hljs-comment"># 第四阶段：发动攻击</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">发射静态导弹</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">peaceiris/actions-gh-pages@v3</span>  <span class="hljs-comment"># 第三方导弹系统</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">github_token:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.HEXO_DEPLOY_KEY</span> <span class="hljs-string">&#125;&#125;</span> <span class="hljs-comment"># 使用接头暗号</span><br>          <span class="hljs-attr">publish_dir:</span> <span class="hljs-string">./public</span>    <span class="hljs-comment"># 弹药存放位置</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-军火库黑话解析"><a href="#2-军火库黑话解析" class="headerlink" title="2. 军火库黑话解析"></a>2. 军火库黑话解析</h3><table>
+<thead>
+<tr>
+<th>武器代码</th>
+<th>军火商</th>
+<th>作用说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>actions/checkout@v3</code></td>
+<td>GitHub 官方出品</td>
+<td>获取仓库代码（连主题文件都不放过）</td>
+</tr>
+<tr>
+<td><code>peaceiris/actions-gh-pages@v3</code></td>
+<td>第三方大佬开发</td>
+<td>把public目录推送到GitHub Pages</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🎮-日常摸鱼操作指南"><a href="#🎮-日常摸鱼操作指南" class="headerlink" title="🎮 日常摸鱼操作指南"></a>🎮 日常摸鱼操作指南</h2><h3 id="1-行云流水三连击"><a href="#1-行云流水三连击" class="headerlink" title="1. 行云流水三连击"></a>1. 行云流水三连击</h3><ol>
+<li>在VSCode新建文章：<code>hexo new &quot;老板看不见的摸鱼技巧&quot;</code></li>
+<li>执行黄金指令：<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy  <span class="hljs-comment"># 生成+部署到公有仓</span><br>git add . &amp;&amp; git commit <span class="hljs-literal">-m</span> <span class="hljs-string">&quot;更新了摸鱼指南&quot;</span> &amp;&amp; git push origin main  <span class="hljs-comment"># 推送源码到私有仓</span><br></code></pre></td></tr></table></figure></li>
+<li>喝咖啡等待机器人自动同步（约2分钟）</li>
+</ol>
+<h3 id="2-行动闭环验证"><a href="#2-行动闭环验证" class="headerlink" title="2. 行动闭环验证"></a>2. 行动闭环验证</h3><p>✅ 访问 <code>https://你的名字.github.io</code> 查看效果<br>✅ 检查私有仓Actions标签页的绿色√<br>✅ 公有仓的commit显示来自GitHub Actions  </p>
+<p><img src="https://media.giphy.com/media/3o6Zt6KHxJTZ5sHrtC/giphy.gif" srcset="/img/loading.gif" lazyload alt="验证成功"></p>
+<hr>
+<h2 id="🚨-特工逃生指南"><a href="#🚨-特工逃生指南" class="headerlink" title="🚨 特工逃生指南"></a>🚨 特工逃生指南</h2><h3 id="1-机器人突然罢工"><a href="#1-机器人突然罢工" class="headerlink" title="1. 机器人突然罢工"></a>1. 机器人突然罢工</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看本地Node版本</span><br>node -v<br><span class="hljs-comment"># 检查workflow中的node-version是否一致</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-主题文件神秘失踪"><a href="#2-主题文件神秘失踪" class="headerlink" title="2. 主题文件神秘失踪"></a>2. 主题文件神秘失踪</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 在VSCode终端执行</span><br>git submodule update -<span class="hljs-literal">-init</span> -<span class="hljs-literal">-recursive</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-密钥验证失败"><a href="#3-密钥验证失败" class="headerlink" title="3. 密钥验证失败"></a>3. 密钥验证失败</h3><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">- 错误提示：Permission denied (publickey)</span><br><span class="hljs-addition">+ 解决方案：</span><br>  1. 重新生成Token并更新Secrets<br>  2. 检查公有仓Settings→Deploy keys是否添加公钥<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔍-特工终极问答"><a href="#🔍-特工终极问答" class="headerlink" title="🔍 特工终极问答"></a>🔍 特工终极问答</h2><h3 id="Q1：如果只想用GitHub-Pages怎么玩？"><a href="#Q1：如果只想用GitHub-Pages怎么玩？" class="headerlink" title="Q1：如果只想用GitHub Pages怎么玩？"></a>Q1：如果只想用GitHub Pages怎么玩？</h3><p>A：适合佛系摸鱼选手，配置<code>_config.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">https://github.com/你的名字/你的名字.github.io.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">main</span><br></code></pre></td></tr></table></figure>
+<p>然后每次手动执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo clean &amp;&amp; hexo deploy  <span class="hljs-comment"># 就像手动往橱窗里摆商品</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Q2：hexo-deploy和git-push有什么区别？"><a href="#Q2：hexo-deploy和git-push有什么区别？" class="headerlink" title="Q2：hexo deploy和git push有什么区别？"></a>Q2：hexo deploy和git push有什么区别？</h3><p>A：这是双线作战的秘密通道：</p>
+<ul>
+<li><code>hexo deploy</code>：把<code>public/</code>推送到<strong>公有仓</strong>（展示橱窗）  </li>
+<li><code>git push</code>：把源码推送到<strong>私有仓</strong>（触发机器人自动工作）<br>当使用GitHub Actions后，<code>hexo deploy</code>可退休了——机器人会自动帮你摆橱窗！</li>
+</ul>
+<h3 id="Q3：机器人怎么打通两个仓库？"><a href="#Q3：机器人怎么打通两个仓库？" class="headerlink" title="Q3：机器人怎么打通两个仓库？"></a>Q3：机器人怎么打通两个仓库？</h3><p>A：通过以下黑魔法实现跨仓操控：</p>
+<ol>
+<li><strong>监听私有仓</strong>的git push事件  </li>
+<li>用<code>HEXO_DEPLOY_KEY</code>获得<strong>公有仓</strong>的写入权限  </li>
+<li>生成新的<code>public/</code>并强制推送到公有仓<br>整个过程就像用私有仓的钥匙，打开了公有仓的保险柜！</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>私有仓操作</th>
+<th>公有仓效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>推送源码到<code>hexo-source</code></td>
+<td>触发GitHub Actions</td>
+</tr>
+<tr>
+<td>2</td>
+<td>机器人读取Token</td>
+<td>获得访问公有仓的权限</td>
+</tr>
+<tr>
+<td>3</td>
+<td>生成<code>public/</code></td>
+<td>强制推送到<code>yourname.github.io</code>的main分支</td>
+</tr>
+</tbody></table>
+<h3 id="Q4：为什么git-push后GitHub-Pages会自动更新？"><a href="#Q4：为什么git-push后GitHub-Pages会自动更新？" class="headerlink" title="Q4：为什么git push后GitHub Pages会自动更新？"></a>Q4：为什么git push后GitHub Pages会自动更新？</h3><p>A：因为GitHub Actions监听了你的推送事件，触发自动化部署流水线，就像有个机器人在帮你按部署按钮！<br>peaceiris/actions-gh-pages这个第三方插件会通过Token自动识别你的账户，把public/推送到&lt;用户名&gt;.github.io仓库</p>
+<h3 id="Q5：public目录会出现在私有仓吗？"><a href="#Q5：public目录会出现在私有仓吗？" class="headerlink" title="Q5：public目录会出现在私有仓吗？"></a>Q5：public目录会出现在私有仓吗？</h3><p>A：绝对不行！在私有仓的.gitignore添加：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">/public</span><br><span class="hljs-string">/node_modules</span><br>*<span class="hljs-string">.log</span><br><span class="hljs-string">.deploy_git/</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Q6：部署密钥到底放在哪？"><a href="#Q6：部署密钥到底放在哪？" class="headerlink" title="Q6：部署密钥到底放在哪？"></a>Q6：部署密钥到底放在哪？</h3><p>A：<code>HEXO_DEPLOY_KEY</code>永远放在<strong>私有仓</strong>的Secrets里！</p>
+<h3 id="Q7：HEXO-DEPLOY-KEY-有什么作用？"><a href="#Q7：HEXO-DEPLOY-KEY-有什么作用？" class="headerlink" title="Q7：HEXO_DEPLOY_KEY 有什么作用？"></a>Q7：HEXO_DEPLOY_KEY 有什么作用？</h3><p>A：<code>HEXO_DEPLOY_KEY</code>的真面目</p>
+<ul>
+<li><strong>身份</strong>：这是你在GitHub生成的<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">Classic Token</a></li>
+<li><strong>超能力</strong>：拥有<code>repo</code>权限的Token可以操控你账户下的<strong>所有仓库</strong></li>
+<li><strong>存放位置</strong>：藏在<strong>私有仓</strong>的Secrets里（就像把核弹按钮放在自家保险柜）</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>摸鱼备忘录</strong>：<br>想要更快的加载速度？试试在Workflow添加CDN部署步骤！<br>记住：最高级的摸鱼是让代码替你工作，而你，负责喝咖啡。<a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">Hexo官方文档</a>有更多黑科技！</p>
+</blockquote>
+<p><img src="https://media.giphy.com/media/l0MYNB04rBb26sLS8/giphy.gif" srcset="/img/loading.gif" lazyload alt="任务完成"></p>
+<p>``` </p>
+<p><strong>摸鱼认证考试</strong> 🎯  </p>
+<ol>
+<li>访问你的GitHub Pages页面 → 成功+10分  </li>
+<li>私有仓Actions显示绿色√ → 成功+20分  </li>
+<li>本地public目录干净如新 → 成功+30分<br>总分≥50分 → 恭喜获得”摸鱼大师”称号！ 🏆</li>
+</ol>
+<blockquote>
+<p><strong>特别彩蛋</strong>：在公有仓的<code>Settings→Pages</code>里开启Enforce HTTPS，给你的橱窗加上金库防盗门！</p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Hexo/">Hexo</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/03/15/Gitee%20+%20Hexo%20+%20Fluid%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%85%8D%E8%B4%B9%E7%BD%91%E7%AB%99/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Gitee + Hexo + Fluid 搭建个人免费网站</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">设计模式-策略模式（搭配自定义注解+枚举）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
